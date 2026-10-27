@@ -126,31 +126,49 @@ Editor Color Scheme 은 담지 않습니다. Gerry Storm 테마를 고르면 같
 ## 새 기기에서
 
 1. Android Studio 를 설치하고 한 번 실행했다가 **종료**합니다(설정 폴더가 생깁니다).
-2. 받아서 넣습니다.
+2. 받아서 바뀔 것을 보고 넣습니다.
    ```bash
    git clone https://github.com/3dagger/android-studio-setting.git ~/android-studio-setting
-   ~/android-studio-setting/import.sh
+   cd ~/android-studio-setting
+   ./import.sh --dry-run
+   ./import.sh
    ```
 3. 끝에 나오는 플러그인(`plugins.txt`)을 Settings > Plugins > Marketplace 에서 설치하고, 테마를 다시 고릅니다([테마·글꼴](#테마글꼴)).
 
-덮인 파일은 `backup/<설정 폴더>-<시각>/` 에 남습니다(커밋하지 않습니다).
+덮이거나 지운 파일은 `backup/<설정 폴더>-<시각>/` 에 남습니다(커밋하지 않습니다).
 
-## 설정을 바꾼 뒤
+## 기기 사이 동기화
+
+집 Mac·회사 PC 어디서든 바꾸고 올릴 수 있습니다. 순서만 지킵니다.
+
+**받기** — 다른 기기에서 올린 설정을 이 기기에 넣습니다.
 
 ```bash
-cd ~/android-studio-setting
-./export.sh
-git diff
-git commit -am "..." && git push
+git pull --rebase
+./import.sh --dry-run   # 바뀔 것: + 새로, ~ 바뀜, - 지움
+./import.sh             # Android Studio 를 끈 상태에서
 ```
 
-Android Studio 는 설정을 바로 저장하지 않을 수 있으니, 바꾼 직후라면 창을 한 번 벗어나거나 종료한 뒤 내보냅니다.
+**올리기** — 이 기기에서 바꾼 설정을 올립니다. **pull 보다 export 가 먼저**입니다.
+
+```bash
+./export.sh
+git diff
+git add -A && git commit -m "..."
+git pull --rebase       # 다른 기기의 변경과 합칩니다
+./import.sh             # pull 로 받은 변경이 있으면
+git push
+```
+
+- pull 만 하고 import 하지 않은 채 export 하면 받은 변경을 되돌리게 됩니다. 기기마다 마지막으로 맞춘 `config/` 의 지문을 `.git/android-studio-sync` 에 두고, `export.sh` 가 이를 보고 멈춥니다. 처음 쓰는 기기도 import 를 한 번 한 뒤에 export 할 수 있습니다.
+- Android Studio 는 설정을 바로 저장하지 않을 수 있으니, 바꾼 직후라면 창을 한 번 벗어나거나 종료한 뒤 내보냅니다.
+- Claude Code 에게 맡기면 이 저장소의 `CLAUDE.md` 순서(차이를 먼저 보여 주고 확인받기)를 따릅니다.
 
 ## 동작
 
 - 설정 폴더는 버전마다 따로 생깁니다(`~/Library/Application Support/Google/AndroidStudio2026.2.1`, Linux 는 `~/.config/Google/…`). 두 스크립트 모두 가장 높은 버전 폴더를 고르고, 다른 폴더는 인자로 줍니다: `./import.sh <설정 폴더>`.
 - `export.sh` 는 `config/` 를 매번 새로 채웁니다. 지운 설정도 diff 에 나옵니다.
-- `import.sh` 는 `config/` 의 파일을 덮어쓰기만 하고, 설정 폴더의 다른 파일은 건드리지 않습니다. Android Studio 가 켜져 있으면 멈춥니다(종료할 때 메모리의 설정으로 다시 덮어쓰기 때문입니다).
+- `import.sh` 는 IDE 를 `config/` 에 맞춥니다. `files.txt` 범위 안에서 저장소에 없는 파일은 IDE 에서도 지웁니다(다른 기기에서 지운 설정이 살아나지 않게). 범위 밖 파일은 건드리지 않습니다. Android Studio 가 켜져 있으면 멈춥니다(종료할 때 메모리의 설정으로 다시 덮어쓰기 때문입니다). `--dry-run` 은 켜져 있어도 됩니다.
 - 심볼릭 링크를 쓰지 않습니다. IDE 가 설정 파일을 새로 쓰면서 링크가 일반 파일로 바뀔 수 있습니다.
 - `studio.vmoptions` 는 Toolbox 가 넣는 줄(`-Dide.managed.by.toolbox`·`-Dtoolbox.notification.*` — 기기별 토큰·경로)을 빼고 담고, 넣을 때는 그 기기의 Toolbox 줄을 남깁니다.
 

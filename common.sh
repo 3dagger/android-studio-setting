@@ -30,6 +30,19 @@ manifest() {
   grep -v -e '^#' -e '^[[:space:]]*$' files.txt
 }
 
+# 이 기기의 IDE 와 마지막으로 맞춘(import·export) config/ 의 지문을 .git 안에 둡니다. 기기마다 따로이고 커밋되지 않습니다.
+sync_mark() {
+  echo "$(git rev-parse --git-dir)/android-studio-sync"
+}
+
+config_digest() {
+  (cd config && find . -type f ! -name .DS_Store | LC_ALL=C sort | while IFS= read -r f; do shasum "$f"; done) | shasum | cut -d ' ' -f 1
+}
+
+mark_synced() {
+  config_digest > "$(sync_mark)"
+}
+
 # plugins/ 에서 마켓플레이스 ID 와 이름을 뽑습니다. 플러그인은 폴더(lib/*.jar)이거나 jar 하나입니다.
 list_plugins() {
   local p jar

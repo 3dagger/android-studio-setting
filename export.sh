@@ -5,6 +5,13 @@ set -euo pipefail
 cd "$(dirname "$0")"
 source ./common.sh
 
+# 이 기기 IDE 에 아직 넣지 않은 변경(다른 기기에서 받은 것)이 config/ 에 있으면, 내보내기가 그것을 되돌립니다.
+if [ "$(cat "$(sync_mark)" 2> /dev/null)" != "$(config_digest)" ]; then
+  echo "config/ 가 이 기기에서 마지막으로 맞춘 뒤 바뀌었습니다(다른 기기의 변경을 받았거나 이 기기에서 처음 씁니다)." >&2
+  echo "./import.sh --dry-run 으로 차이를 보고 ./import.sh 로 넣은 뒤 내보내세요." >&2
+  exit 1
+fi
+
 src="${1:-$(latest_config_dir)}"
 echo "내보내는 곳: $src"
 
@@ -29,5 +36,6 @@ find config -name .DS_Store -delete
   echo "# export.sh 가 만듭니다. 새 기기에서는 Settings > Plugins > Marketplace 에서 ID 로 찾아 설치합니다."
   list_plugins "$src/plugins"
 } > plugins.txt
+mark_synced
 
 echo "완료. git status·git diff 로 바뀐 것을 확인한 뒤 커밋하세요."
