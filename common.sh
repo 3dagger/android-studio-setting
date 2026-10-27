@@ -30,17 +30,23 @@ manifest() {
   grep -v -e '^#' -e '^[[:space:]]*$' files.txt
 }
 
-# plugins/ 의 jar 에서 마켓플레이스 ID 와 이름을 뽑습니다.
+# plugins/ 에서 마켓플레이스 ID 와 이름을 뽑습니다. 플러그인은 폴더(lib/*.jar)이거나 jar 하나입니다.
 list_plugins() {
-  local p jar xml
-  for p in "$1"/*/; do
-    for jar in "$p"lib/*.jar; do
-      xml=$(unzip -p "$jar" META-INF/plugin.xml 2> /dev/null) || continue
-      [ -n "$xml" ] || continue
-      printf '%s  # %s\n' \
-        "$(sed -n 's:.*<id>\(.*\)</id>.*:\1:p' <<< "$xml" | head -1)" \
-        "$(sed -n 's:.*<name>\(.*\)</name>.*:\1:p' <<< "$xml" | head -1)"
-      break
+  local p jar
+  for p in "$1"/*; do
+    for jar in "$p" "$p"/lib/*.jar; do
+      plugin_line "$jar" && break
     done
   done
+  return 0
+}
+
+plugin_line() {
+  local xml
+  [ -f "$1" ] || return 1
+  xml=$(unzip -p "$1" META-INF/plugin.xml 2> /dev/null) || return 1
+  [ -n "$xml" ] || return 1
+  printf '%s  # %s\n' \
+    "$(sed -n 's:.*<id>\(.*\)</id>.*:\1:p' <<< "$xml" | head -1)" \
+    "$(sed -n 's:.*<name>\(.*\)</name>.*:\1:p' <<< "$xml" | head -1)"
 }
