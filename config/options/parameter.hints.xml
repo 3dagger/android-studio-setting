@@ -1,0 +1,15 @@
+<application>
+  <component name="ParameterNameHintsSettings">
+    <blacklists>
+      <blacklist language="Kotlin">
+        <added pattern="androidx.lifecycle.LiveData.observe(owner,observer)" />
+      </blacklist>
+    </blacklists>
+    <option id="SHOW_PROPERTY_HINT" value="true" />
+    <option id="java.multiple.params.same.type" value="true" />
+    <option id="SHOW_LOCAL_VARIABLE_HINT" value="true" />
+    <option id="java.simple.sequentially.numbered" value="true" />
+    <option id="java.clear.expression.type" value="true" />
+    <option id="java.method.name.contains.parameter.name" value="true" />
+  </component>
+</application>

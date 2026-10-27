@@ -1,0 +1,24 @@
+<templateSet group="AndroidComments">
+  <template name="_methodComment" value="/**&#10; * &#10; * $text$&#10; * &#10; * @author 이수현&#10; * @return &#10; * @param &#10; **/" description="메서드 주석" toReformat="false" toShortenFQNames="true">
+    <variable name="text" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="KOTLIN" value="true" />
+    </context>
+  </template>
+  <template name="_todo" value="/**&#10;* @Date : $date$ $time$&#10;* TODO :: $Text$&#10;**/" description="TODO 주석" toReformat="false" toShortenFQNames="true">
+    <variable name="date" expression="date()" defaultValue="" alwaysStopAt="false" />
+    <variable name="time" expression="time()" defaultValue="" alwaysStopAt="false" />
+    <variable name="Text" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="KOTLIN" value="true" />
+    </context>
+  </template>
+  <template name="_suppressComment" value="/**&#10; * @suppress 제외대상&#10; * @author 이수현&#10; **/" description="제외 주석" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="KOTLIN" value="true" />
+    </context>
+  </template>
+</templateSet>

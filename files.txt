@@ -1,0 +1,30 @@
+# export.sh 가 내보내는 설정입니다. Android Studio 설정 폴더 기준 상대 경로이고, 폴더는 통째로 담습니다.
+# 공개 저장소입니다 — 계정·토큰·기기마다 다른 경로가 든 파일은 넣지 않습니다(README 의 "뺀 것").
+
+# 키맵(쓰는 것: macOS copy)
+keymaps
+options/mac/keymap.xml
+options/keymapFlags.xml
+
+# Live Template·코드 스타일·검사·Quick List
+templates
+codestyles
+inspection
+quicklists
+
+# 색 테마(쓰는 것: 3dagger)
+colors/3dagger.icls
+options/colors.scheme.xml
+
+# 편집기·글꼴·화면
+options/editor.xml
+options/editor-font.xml
+options/console-font.xml
+options/terminal-font.xml
+options/laf.xml
+options/ui.lnf.xml
+options/ide.general.xml
+options/advancedSettings.xml
+options/parameter.hints.xml
+options/projectView.xml
+options/terminal.xml

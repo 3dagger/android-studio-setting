@@ -1,0 +1,10 @@
+<application>
+  <component name="LafManager">
+    <laf themeId="ExperimentalDark" />
+    <lafs-to-previous-schemes>
+      <laf-to-scheme laf="Darcula" scheme="3dagger" />
+      <laf-to-scheme laf="ExperimentalDark" scheme="3dagger" />
+      <laf-to-scheme laf="Islands Dark" scheme="3dagger" />
+    </lafs-to-previous-schemes>
+  </component>
+</application>

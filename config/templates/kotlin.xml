@@ -1,0 +1,12 @@
+<templateSet group="kotlin">
+  <template name="cmtClass" value="/**&#10;* &lt;pre&gt;&#10;* $package$&#10;* ㄴ $class$&#10;* &lt;/pre&gt;&#10;* @Date     : $date$ $time$&#10;* @Author   : 이수현&#10;* @Version  : 1.0.0&#10;* @See      :&#10;**/" description="클래스 주석" toReformat="false" toShortenFQNames="true">
+    <variable name="package" expression="currentPackage()" defaultValue="" alwaysStopAt="true" />
+    <variable name="class" expression="fileName()" defaultValue="" alwaysStopAt="true" />
+    <variable name="date" expression="date()" defaultValue="" alwaysStopAt="true" />
+    <variable name="time" expression="time()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="KOTLIN" value="true" />
+    </context>
+  </template>
+</templateSet>

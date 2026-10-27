@@ -1,0 +1,10 @@
+<application>
+  <component name="UISettings">
+    <option name="FULL_PATHS_IN_TITLE_BAR" value="true" />
+    <option name="MAX_LOOKUP_LIST_HEIGHT" value="37" />
+    <option name="MAX_LOOKUP_WIDTH2" value="1533" />
+    <option name="MERGE_EQUAL_STACKTRACES" value="false" />
+    <option name="OPEN_TABS_AT_THE_END" value="true" />
+    <option name="UI_DENSITY" value="COMPACT" />
+  </component>
+</application>
