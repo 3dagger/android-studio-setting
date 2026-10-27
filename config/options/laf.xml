@@ -1,6 +1,6 @@
 <application>
   <component name="LafManager">
-    <laf themeId="ExperimentalDark" />
+    <laf themeId="64bac2a8-9558-4b8a-a0e0-a4017ec9115e" />
     <lafs-to-previous-schemes>
       <laf-to-scheme laf="Darcula" scheme="3dagger" />
       <laf-to-scheme laf="ExperimentalDark" scheme="3dagger" />

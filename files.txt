@@ -12,10 +12,6 @@ codestyles
 inspection
 quicklists
 
-# 색 테마(쓰는 것: 3dagger)
-colors/3dagger.icls
-options/colors.scheme.xml
-
 # 편집기·글꼴·화면
 options/editor.xml
 options/editor-font.xml

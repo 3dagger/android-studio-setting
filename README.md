@@ -12,12 +12,12 @@
 | 분류 | 요약 | 파일 |
 |---|---|---|
 | [키맵](#키맵--macos-copy) | `macOS copy` — 단축키 32개 지정, 기본 단축키 40개 해제 | `keymaps/`, `options/mac/keymap.xml` |
-| [Live Template](#live-template) | 로그 2개·주석 4개, 쓰지 않는 언어의 기본 템플릿 끔 | `templates/` |
+| [Live Template](#live-template) | 주석 4개, 쓰지 않는 언어의 기본 템플릿 끔 | `templates/` |
 | [코드 스타일·검사](#코드-스타일검사) | Kotlin 공식 스타일, import·XML 속성 순서 | `codestyles/`, `inspection/` |
-| [테마·글꼴](#테마글꼴) | Dark(새 UI) + 색 테마 `3dagger`, Monaco 12 | `colors/`, `options/laf.xml`, `options/*-font.xml` |
+| [테마·글꼴](#테마글꼴) | UI 테마 Gerry Storm(Gerry Themes 플러그인), 글꼴 크기 12 | `options/laf.xml`, `options/*-font.xml` |
 | [편집기](#편집기) | 공백 표시, Kotlin 타입 힌트, VCS 작성자 표시 | `options/editor.xml`, `options/parameter.hints.xml` |
 | [화면·동작](#화면동작) | Compact 밀도, 확인 창 줄이기 | `options/ui.lnf.xml`, `options/ide.general.xml` … |
-| [메모리·플러그인](#메모리플러그인) | 힙 8GB, 플러그인 4개 | `studio.vmoptions`, `plugins.txt` |
+| [메모리·플러그인](#메모리플러그인) | 힙 8GB, 플러그인 5개 | `studio.vmoptions`, `plugins.txt` |
 
 ### 키맵 — `macOS copy`
 
@@ -60,8 +60,6 @@ macOS 10.5+ 키맵을 바탕으로 아래만 바꿨습니다. ⌘ Command · ⌥
 
 | 약어 | 펼친 결과 |
 |---|---|
-| `tim` | `Timber.d(…)` |
-| `lgd` | `Logger.d(…)`(orhanobut Logger) |
 | `cmtClass` | 클래스 주석 — 패키지·파일 이름·날짜·작성자·버전 |
 | `_methodComment` | 메서드 주석 — 설명·작성자·`@return`·`@param` |
 | `_todo` | 날짜가 붙은 `TODO ::` 주석 |
@@ -81,11 +79,12 @@ C/C++·CMake·Objective-C·Shell Script·Zen HTML·Zen XSL 의 기본 템플릿 
 
 | 항목 | 값 |
 |---|---|
-| UI 테마 | Dark(새 UI) |
-| 색 테마 | `3dagger` — Darcula 기반, Kotlin 클래스 `#74abff`, 인터페이스 `#a5c261`, Indent Rainbow 색 |
-| 편집기 글꼴 | Monaco 12, 줄 간격 1.2 |
-| 콘솔 글꼴 | Monaco |
+| UI 테마 | Gerry Storm(Gerry Themes 플러그인) |
+| 편집기 글꼴 | 크기 12(글꼴 이름은 IDE 기본) |
 | 터미널 글꼴 | 크기 12 |
+
+Editor Color Scheme 은 담지 않습니다. Gerry Storm 테마를 고르면 같은 이름의 편집기 색 구성도 함께 바뀝니다.
+플러그인 없이 켜면 테마를 찾지 못해 기본 테마로 돌아가니, 새 기기에서는 플러그인을 설치한 뒤 Settings > Appearance & Behavior > Appearance > Theme 에서 Gerry Storm 을 다시 고릅니다.
 
 ### 편집기
 
@@ -116,12 +115,13 @@ C/C++·CMake·Objective-C·Shell Script·Zen HTML·Zen XSL 의 기본 템플릿 
 
   | ID | 이름 |
   |---|---|
+  | `com.jetbrains.gerryPurpleTheme` | Gerry Themes |
   | `cn.yiiguxing.plugin.translate` | Translation |
   | `com.developerphil.adbidea` | ADB Idea |
   | `com.github.deeepamin.gitlabciaid` | CI Aid for GitLab |
   | `com.suusan2go.kotlin-fill-class` | kotlin-fill-class |
 
-키맵의 ⌃⌘P(String Manipulation)와 색 테마의 Indent Rainbow 색은 지금 설치되지 않은 플러그인의 설정입니다. 플러그인이 없으면 무시됩니다.
+키맵의 ⌃⌘P(String Manipulation)는 지금 설치되지 않은 플러그인의 단축키입니다. 플러그인이 없으면 무시됩니다.
 
 ## 새 기기에서
 
@@ -131,7 +131,7 @@ C/C++·CMake·Objective-C·Shell Script·Zen HTML·Zen XSL 의 기본 템플릿 
    git clone https://github.com/3dagger/android-studio-setting.git ~/android-studio-setting
    ~/android-studio-setting/import.sh
    ```
-3. 끝에 나오는 플러그인(`plugins.txt`)을 Settings > Plugins > Marketplace 에서 설치합니다.
+3. 끝에 나오는 플러그인(`plugins.txt`)을 Settings > Plugins > Marketplace 에서 설치하고, 테마를 다시 고릅니다([테마·글꼴](#테마글꼴)).
 
 덮인 파일은 `backup/<설정 폴더>-<시각>/` 에 남습니다(커밋하지 않습니다).
 
@@ -167,4 +167,4 @@ Android Studio 는 설정을 바로 저장하지 않을 수 있으니, 바꾼 �
 | `*statistics*`, `updates.xml`, `*.db`, `workspace/`, `tasks/`, `event-log-metadata/` | 통계·캐시 |
 | `yiiguxing.translation.xml` | 설정은 번역기 하나뿐이고 나머지는 번역 기록·창 위치 |
 | `plugins/` | 바이너리 — ID 목록(`plugins.txt`)만 담습니다 |
-| `colors/` 의 나머지 | 쓰지 않는 사본과 Material Theme 플러그인이 만든 테마 |
+| `colors/`, `colors.scheme.xml` | Editor Color Scheme — UI 테마(Gerry Storm)를 따라갑니다 |
